@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        let num1=parseFloat(prompt("Enter the first number: "))
+        let opearator=prompt("choose one of the operator: [+,-,*,/]")
+        let num2=parseFloat(prompt("Enter the second number"))
+        const faultyops={
+            "+":"-",
+            "-":"/",
+            "*":"**",
+            "/":"-"
+
+        };
+        let random=Math.random();
+        if(random<0.1)
+        {
+            opearator==faultyops[opearator];
+
+        }
+       let result=eval(`${num1} ${opearator} ${num2}`);
+alert("The result is: "+`${result}`);
+document.write("Calculation used:",`${num1} ${opearator} ${num2}`,"=",`${result}`)
+    </script>                                                                            
+</head>
+<body>
+    
+</body>
+</html>
