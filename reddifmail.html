@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+    <style>
+        .image{
+            border: 1px solid rgb(214, 214, 214);
+            border-radius: 15px;
+        }
+        form{
+            display: flex;
+            justify-content: center;
+            position: relative;
+            left: -100px;
+            margin: 20px;
+            padding: 10px;
+        }
+        .header{
+            transform: translateX(15%);
+        }
+        .reddif{
+            position: relative;
+            left:0px;
+        }
+        .red{
+            position: relative;
+            left: -315px;
+            background-color: #4a96d1;
+            color: white;
+        }
+        .NUMBER{
+            position: relative;
+            left: -124px;
+                left: -378px;
+   
+    padding-top: 4px;
+        }
+        #text{
+            position: relative;
+            left: -156px;
+        }
+        input{
+            padding: 11px 50px;
+            border-radius: 12px;
+            border: 1px solid rgb(207, 207, 207);
+            font-size: 14px;
+            padding-right: 209px;
+            text-align: center ;
+        }
+        td {
+            font-size: 16px;
+        }
+        .cap{
+            position: relative;
+            left: -378px;
+        }
+        .check{ 
+            position: relative;
+            left: -414px;
+        }
+        .submit{
+            background-color: #4a96d1;
+            color: white;
+                padding-right: 100px;
+    padding-left: 100px;
+    position: relative;
+    left: 131px;
+}
+
+        
+        .gen{
+            border: 1px solid rgb(207, 207, 207);
+            border-collapse: collapse;
+            margin: 12px;
+            padding: 12px;
+            border-radius: 12px;
+            
+           
+        }
+    .mal{
+            margin-right: 12px;
+        }
+    </style>
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="header">
+<h3>
+Create a Rediffmail account</h3>
+<div>All fields are mandatory.</div>
+</div>
+
+
+<form name="myForm" onsubmit="return(validate());">
+    <table>
+    <tr> 
+        <td>Full Name</td>
+        <td><input type="text" placeholder="Enter your full name" name="fullname"></td>
+    </tr>
+    <tr>
+        <td>Choose a Rediffmail ID</td>
+        <td><input type="text" placeholder="Enter reddifmail ID" name="email"></td>
+        <td class="reddif"> @rediffmail.com</td>
+        <td><input type="button" value="check validity" class="red" name="validity" onclick="validity()"></td>
+    </tr>
+    <tr>
+        <td>Choose a Password</td>
+        <td><input type="text" placeholder="Enter password" name="password"></td>
+    </tr>
+    <tr>
+        <td>Retype Password</td>
+        <td><input type="text " placeholder="Retype Password" name="repass"></td>
+    </tr>
+    <tr>
+        <td>Date of Birth</td>
+        <td><input type="date" name="birthdate"></td>
+    </tr>
+    <tr>
+        <td>Gender</td>
+        <td class="gen"><input type="radio" name="gender">Male &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="gender">Female</td>
+    </tr>
+    <tr>
+        <td>I live in</td>
+        <td><select  name="country">
+            <option value="0">select your country</option>
+            <option value="1">India</option>
+            <option value="2">Nepal</option>
+            <option value="3">Bangladesh</option>
+            <option value="4"> Maldives</option>
+        </select></td>
+    </tr>
+    <tr>
+        <td>City</td>
+        <td><select name="city">
+            <option value="1">Select</option>
+            <option value="2">Mumbai</option>
+            <option value="3">Delhi</option>
+            <option value="4">None of these</option>
+        </select></td>
+    </tr>
+    <tr>
+        <td>My Recovery Email ID</td>
+         <td><input type="text"  name="recoverymail" placeholder="Enter recovery email"></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td><input type="checkbox" name="box"></td>
+        <td class="check">check here if you don't have a recovery email </td>
+    </tr>
+    <tr>
+        <td>My Mobile Number</td>
+        <td><select >
+            <option value="1">+91</option>
+            <option value="2">+977</option>
+            <option value="3">+911</option>
+            <option value="4">+901</option>
+        </select></td>
+        <td><input type="number" name="number" class="NUMBER"></td>
+    </tr>
+    <tr>
+        <td></td>
+        
+    </tr>
+    <tr>
+        <td></td>
+        <td id="text">Enter the text shown above</td>
+        <td><input type="text" name="captcha" placeholder="Enter captcha" class="cap"></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td><input type="submit" value="Create my account" class="submit"></td>
+    </tr>
+    </table>
+</form>
+
+
+
+
+    <script type="text/javascript">
+        function validate()
+    {
+        if(document.myForm.fullname.value=="")
+            {
+                alert("Please provide your name");
+                return false;
+
+            }
+        
+        if(document.myForm.email.value=="")
+            {
+                alert("Please provide your Email");
+                return false;
+            }
+        if(document.myForm.password.value=="")
+            {
+                alert("Please provide your password");
+                return false;
+            }
+        if(document.myForm.repass.value=="")
+            {
+                alert("Please re-enter your password");
+                return false;    
+            }   
+        if(document.myForm.birthdate.value=="")
+            {
+                alert("Please provide your date of birth");
+                return false;    
+            }       
+        if(document.myForm.gender.value=="")
+            {
+                alert("Please select your gender");
+                return false;    
+            }       
+        if(document.myForm.country.value=="0")
+            {
+                alert("Please select your country");
+                return false;    
+            }       
+        if(document.myForm.city.value=="1")
+            {
+                alert("Please select your city");
+                return false;    
+            }       
+        if(document.myForm.number.value=="")
+            {
+                alert("Please provide your number");
+                return false;    
+            }       
+        if(document.myForm.captcha.value=="")
+            {
+                alert("Please enter the captcha");
+                return false;    
+            }       
+             
+            return true;
+    }
+    
+    
+    </script>
+</body>
+</html>
