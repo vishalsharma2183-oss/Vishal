@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .addedclass{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="container red hello" style="display: flex;" data-created-by="Vishal sharma">HII I am a text <span></span></div>
+    <div class="boxes">I am a boxes</div>
+    <div class="box1">I am a box</div>
+    <div class="box2">I am a box</div>
+    <div class="box3">I am a box</div>
+    <!--
+
+    // identifying node name and tag name
+
+     document.querySelector(".container").tagName 
+        'DIV'
+    document.querySelector(".container").nodeName
+        'DIV
+let div=document.querySelector(".container");
+undefined
+
+
+    // Inner html and outer html
+div.innerHTML
+'HII I am a text <span></span>'
+div.innerText
+'HII I am a text'
+div.outerHTML
+'<div class="container">HII I am a text <span></span></div>'
+
+// text context to find the text
+
+div.textContent
+'HII I am a text '
+
+
+    // hidden property
+
+div.hidden
+false
+div.hidden=true
+true
+
+    // Inner html and outer html
+document.querySelector(".boxes").innerHTML="How are you"
+'How are you'
+
+        //  Attributes
+document.querySelector(".container").hasAttribute("style")
+false
+document.querySelector(".container").attributes
+NamedNodeMap {0: class, class: class, length: 1}
+document.querySelector(".container").hasAttribute("style")
+true
+document.querySelector(".container").getAttribute("style")
+'display: flex;'
+document.querySelector(".container").setAttribute("style","display:inline;")
+undefined
+document.querySelector(".container").removeAttribute("style")
+undefined
+
+
+    // dataset
+document.querySelector(".container").dataset
+DOMStringMap {createdBy: 'Vishal sharma'}
+
+        // insertion methods
+
+        //document.designMode="on"
+        'on'//
+
+
+
+
+'-->
+
+
+
+<script>
+    console.log("hello world")
+  /*  let div=document.createElement("div")
+   
+    div.innerHTML="Hii im an inserted text using append"
+     div.setAttribute("class","created")
+   // document.querySelector(".container").append(div)
+  // document.body.append(div)
+   // inserts element at the ending
+  //document.body.prepend(div)
+// inserts elements at the beginning
+//document.querySelector(".boxes").before(div)
+// adds elements before the selected element
+//  document.querySelector(".boxes").after(div)
+// adds elements before the selected element
+// document.querySelector(".boxes").replaceWith(div)
+// replaces the elements by the new element
+
+
+//document.body.insertAdjacentElement("afterbegin",div)
+// inserts Element 
+//document.body.insertAdjacentText("afterbegin",div)
+// inserts text
+//document.body.insertAdjacentHTML("afterbegin",div)
+// inserts html
+
+
+//
+document.querySelector(".container").remove()
+undefined
+
+// class name and class list
+document.querySelector(".container").classList
+DOMTokenList(3) ['container', 'red', 'hello', value: 'container red hello']
+document.querySelector(".container").className
+'container red hello'
+document.querySelector(".container").classList.add("addedclass")
+undefined
+document.querySelector(".container").classList.remove("red","hell")
+undefined
+document.querySelector(".container").classList.toggle("addedclass")
+false
+document.querySelector(".container").classList.toggle("addedclass")
+true
+*/
+
+</script>
+</body>
+</html>
