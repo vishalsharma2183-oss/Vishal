@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .card{
+            display: flex;
+           
+            align-content: center;
+            border: 1px solid black;
+            position: relative;
+            margin: 5px;
+            background-color: black;
+            color: white;
+        border-radius: 5px;
+            padding: 6px;
+            
+        }
+        
+        .image img{
+            width: 200px;
+            margin: 5px;    
+            border-radius: 5px;
+        }
+        .capsule{
+            background-color: rgba(0, 0, 0, 0.87);
+            color: white;
+            height: 22px;
+            position: absolute;
+            bottom: 14px;
+           left: 157px;
+           border-radius: 3px;
+           padding: 3px;
+           padding-bottom: 0;
+           padding-top: 0;
+        }
+        .text{
+            margin: 5px;
+        }
+        .text p {font-size: 15px;
+            color: gray;
+
+        }
+        .text h1{
+            color: rgba(255, 255, 255, 0.95);
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="card">
+        <div class="image"><img src="https://i.ytimg.com/vi/tVzUXW6siu0/hq720.jpg?sqp=-oaymwEXCNAFEJQDSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLCgs3kt08JL2BJuEcjc4IMPB9i9NA" alt=""></div>
+        <div class="capsule">33:01</div>
+        <div class="text">
+            <h1>Installing VS Code & How Websites Work | Sigma Web Development Course-Tutorial #1</h1>
+            <p>CodeWithHarry . 727K views . 2 months ago  </p>
+        </div>
+    </div>
+</div>
+
+
+
+    <script>
+function createCard(title,cname,duration,views,monthsold,thumbnail)
+{
+    let viewsnumber;
+    if(views<1000)
+    {
+        viewsnumber=views/1000+"K"
+    }
+    else if(views>9999)
+    {
+        viewsnumber=views/100000+"M"
+    }
+    else {
+        viewsnumber=views
+    }
+    let html=`    <div class="card">
+        <div class="image"><img src="${thumbnail}" alt=""></div>
+        <div class="capsule">${duration}</div>
+        <div class="text">
+            <h1>${title}</h1>
+            <p>${cname} . ${viewsnumber} views . ${monthsold} months ago  </p>
+        </div>
+    </div>`
+    document.querySelector(".container").innerHTML=document.querySelector(".container").innerHTML+html
+}
+
+createCard("Introduction to backend | Sigma Web dev course tutorial-#80","CodeWithHarry","22:12",100000,4,"https://i.ytimg.com/vi/tVzUXW6siu0/hq720.jpg?sqp=-oaymwEXCNAFEJQDSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLCgs3kt08JL2BJuEcjc4IMPB9i9NA")
+    </script>
+</body>
+</html>
