@@ -1,0 +1,146 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  background: #121212;
+  color: white;
+  font-family: "Poppins";
+}
+
+.search {
+  filter: invert(1);
+  height: 40px;
+  width: 40px;
+}
+.navbar {
+  height: 9vh;
+  width: 100%;
+  background-color: #121212;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0;
+}
+.right {
+  width: 66vw;
+  background-color: #1f1f1f;
+
+  height: 80vh;
+  margin: 5px;
+  border-radius: 12px;
+}
+.left {
+  width: 30vw;
+  background-color: #1f1f1f;
+
+  height: 90vh;
+  margin: 5px;
+  padding: 12px;
+  border-radius: 12px;
+}
+.main {
+  display: flex;
+}
+img {
+  height: 40px;
+  width: 40px;
+}
+.top {
+  height: 16vh;
+  background-color: #2a2a2a;
+  margin: 10px;
+  padding: 8px;
+  border-radius: 12px;
+}
+.bottom {
+  height: 16vh;
+  background-color: #2a2a2a;
+  margin: 10px;
+  padding: 8px;
+  border-radius: 12px;
+}
+.footer {
+  margin-top: 20vh;
+  color: rgb(198, 197, 197);
+  border-radius: 12px;
+}
+
+button {
+  border: none;
+  background: none;
+font-weight: bold;
+    cursor: pointer;
+
+  
+}
+.createBtn {
+  background-color: white;
+  color: black;
+  display: inline-block;
+  border-radius: 22px;
+  padding: 8px 22px;
+  margin: 12px;
+  font-size: 14px;
+  text-align: center;
+  font-weight: bold;
+  
+}
+.btn {
+  display: flex;
+  gap: 30px;
+  margin: 0 8px;
+}
+
+.BrowseBtn {
+  background-color: white;
+  color: black;
+  display: inline-block;
+  border-radius: 22px;
+  padding: 10px 24px;
+  margin: 12px;
+  font-size: 14px;
+  text-align: center;
+  margin: 12px;
+  height: 22px;
+  margin:12px;
+}
+.login {
+  background-color: white;
+  color: black;
+  display: inline-block;
+  border-radius: 30px;
+  padding: 6px 16px;
+
+  font-size: 14px;
+  text-align: center;
+}
+.svgs {
+  display: flex;
+  gap: 15px;
+}
+.textsbtn {
+  display: flex;
+}
+h3,
+p {
+  margin: 0 14px;
+}
+.premium,.support,.download,.install,.signup{
+    font-size: 18px;
+    font-weight: bold;
+}
+.EnglishBtn{
+    position: relative;
+    left: 11px;
+    color: white;
+}
+.textsbtn{
+    color:gray ;
+
+}
+.sectext{
+    display: flex;
+      color:gray ;
+}
