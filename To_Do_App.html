@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text" class="input-box">
+    <button class="addBtn">Add</button>
+    <ul class="list"></ul>
+    <script>
+        const list = document.querySelector(".list")
+        const addBtn = document.querySelector(".addBtn")
+        const input = document.querySelector(".input-box")
+        const tasks=JSON.parse(localStorage.getItem("tasks")) || []
+        renderTasks()
+        addBtn.addEventListener("click",addTask)
+function addTask()
+{
+    if (input.value.trim()==="")
+{
+    return;
+}
+let texts=input.value.trim()
+tasks.push({
+    text:texts,
+    completed:false
+})
+renderTasks()
+saveTasks()
+input.value=""
+}
+function renderTasks()
+{
+     list.innerHTML=""  
+tasks.forEach((task,index)=> {
+    const li=document.createElement("li")
+    li.textContent=task.text
+    list.appendChild(li)
+    const dltBtn=document.createElement("button")
+    dltBtn.textContent="Delete"
+    dltBtn.addEventListener("click",()=>{
+        tasks.splice(index,1)
+        saveTasks()
+        renderTasks()
+        
+    })
+    li.appendChild(dltBtn)
+    const editBtn=document.createElement("button")
+    editBtn.textContent="Edit"
+    editBtn.addEventListener("click",()=>{
+        let newTask=prompt("Enter the new task")
+        if (newTask===null || newTask.trim()==="")
+    {
+        return;
+    }
+    task.text=newTask.trim()
+        saveTasks()
+        renderTasks()
+
+    })
+    li.appendChild(editBtn)
+});
+}
+function saveTasks()
+{
+    localStorage.setItem("tasks",JSON.stringify(tasks))
+}
+input.addEventListener("keydown",(e)=>{
+    if(e.key==="Enter")
+{
+    addBtn.click()
+}
+})
+
+    </script>
+</body>
+
+</html>

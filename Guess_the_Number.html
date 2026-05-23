@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+.container{
+    box-sizing: border-box;
+    
+    border: 2px solid black;
+    border-radius: 12px;
+    background-color: rgb(180, 237, 255);
+}
+button{
+    padding: 14px 35px;
+    background: none;
+    background: #1d7eb6;
+    border: none;
+    border-radius: 24px;
+    color: white;
+    text-align: center;
+    font-size: 20px;
+}
+button:hover{
+    border: 1px solid black;
+    box-sizing: border-box;
+}
+.inputbar{
+height: 26px;
+font-size: 18px;
+width: 150px;
+background-color: rgb(200, 240, 238);
+color: black;
+}
+.container{
+    padding: 12px;
+    width: 50%;
+    font-size: 22px;
+}
+    </style>
+</head>
+<body><div class="container">
+   <div class="input">Guess the number<input type="number" class="inputbar"> 
+    <button class="guessBtn">Guess</button></div>
+     <div class="resultbar">Result:-<span class="compare"></span></div> 
+   <div><button class="restart">Restart</button></div>
+    Attempts:<span class="attempts">0</span>
+    <div>Previous guesses:</div>
+<div class="preguesses"></div>
+    </div>
+    <script>
+        const input = document.querySelector(".inputbar")
+        const btn = document.querySelector(".guessBtn")
+        const compare = document.querySelector(".compare")
+        const restart = document.querySelector(".restart")
+        const attempts = document.querySelector(".attempts")
+        const guesses=document.querySelector(".preguesses")
+        let preguess=[]
+        console.log('hello');
+        btn.addEventListener("click", guesser)
+        let rand = Math.ceil(Math.random() * 100)
+        restart.addEventListener("click", () => {
+            rand = Math.ceil(Math.random() * 100)
+            count = 0;
+            attempts.textContent = count;
+            input.value = "";
+            compare.textContent = "";
+            btn.disabled=false;
+            preguess=[]
+            guesses.textContent=preguess;
+
+        })
+        let count = 0
+        btn.addEventListener("click", () => {
+         count++;
+            attempts.textContent = count;
+            if (count >= 10) {
+                alert('Game over');
+                count = 0;
+                attempts.textContent = count
+                rand = Math.ceil(Math.random() * 100)
+                compare.textContent = ""
+            
+            }
+        })
+        function guesser() {
+
+            let number = input.value.trim()
+            if (input.value.trim() === "") {
+                compare.textContent = "Please enter a number"   
+                return false;
+            }
+            if (number > 100 || number < 1) {
+                alert('Enter a number from 1-100');
+
+            }
+            else if (number == rand) {
+                alert("Correct")
+                btn.disabled = true;
+            }
+            else if (number < rand) {
+                compare.textContent = "Too low"
+
+            }
+            else if (number > rand) {
+                compare.textContent = "Too high"
+            }
+            else {
+                return
+
+            }
+            input.value = ""
+            preguess.push(number)
+            guesses.textContent=preguess;
+        }
+
+
+
+
+    </script>
+</body>
+
+</html>
