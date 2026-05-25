@@ -1,121 +1,211 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: ease 0.5s ;
+        }
+
+        body {
+            background: #235689;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+.main{
+    border: 1px solid white;
+    padding: 28px;
+    background: rgb(17 17 98);
+    margin: 24px;
+}
+.addBtn{
+    flex: 1;
+}
+.type{
+    width: 250px;
+    padding: 8px 14px;
+    color:  white;
+    background: #004d99;
+    font-size: 16px;
+    margin: 8px auto;
+    border-radius: 8px;
+}
+input{
+    border: none;
+    padding: 8px;
+    border-radius: 8px;
+    text-align: left;
+    width: 100%;
+}
+p{
+    font-size: 18px;
+    margin-top: 4px;
+}
+button{
+    background: none;
+    background: transparent;
+    border: none;
+    color: rgb(255, 255, 255);
+    background: #548efd;
+    width: 100%;
+    font-size: 18px;
+    text-align: center;
+    padding: 8px 24px;
+    border-radius: 12px;
+    margin: 12px auto;
+}
+.amt{
+    margin-bottom: 4px;
+}
+span{
+    font-size: 18px;
+
+}
+    </style>
 </head>
+
 <body>
-    <select name="type" class="type"><option value="Income">Income</option>
-        <option value="Expense">Expense</option>
-    </select>
-    <input type="text" class="name">
-    <input type="number" class="amount">
-    <button class="addBtn">Add</button>
-    <h2>Transaction History</h2>
-    <div class="container"></div>
-    <div class="summary"></div>
+    <div class="main">
+        <div class="selection">
+            <select name="type" class="type">
+                <option value="Income">Income</option>
+                <option class="border" value="Expense">Expense</option>
+            </select>
+        </div>
+        <div class="inputs">
+            <p>Items:</p>
+            <input type="text" placeholder="example:Salary" class="name">
+            <p class="m">Rupees(₹):</p>
+            <input type="number" placeholder="example:50000" class="amount">
+        </div>
+        <div class="buttons">
+            <button class="addBtn">Add</button>
+        </div>
+        <div class="last">
+            <h2>Transaction History</h2>
+            <div class="container"></div>
+            <div class="summary"></div>
+        </div>
+
+    </div>
     <script>
-        const type=document.querySelector(".type")
-        const input=document.querySelector(".name")
-        const amt=document.querySelector(".amount")
-        const addBtn=document.querySelector(".addBtn")
-        const container=document.querySelector(".container")
-        const summary=document.querySelector(".summary")
+        const type = document.querySelector(".type")
+        const input = document.querySelector(".name")
+        const amt = document.querySelector(".amount")
+        const addBtn = document.querySelector(".addBtn")
+        const container = document.querySelector(".container")
+        const summary = document.querySelector(".summary")
 
-            const transaction=JSON.parse(localStorage.getItem("transactions")) || []
+        const transaction = JSON.parse(localStorage.getItem("transactions")) || []
         renderTransaction()
-        addBtn.addEventListener("click",addTransaction)
-    function addTransaction()
-    {
-        if(input.value.trim()==="" || amt.value.trim()==="" || amt.value.trim()=="e" )
-    {
-        alert('Your input is blank');
-        return;
-    }
-    
-    transaction.push({
-        title:input.value.trim(),
-        amount:Number(amt.value.trim()),
-        type:type.value,
-        date:new Date().toLocaleDateString()
-        
-    })
-    input.value=""
-    amt.value=""
-    saveTransaction()
-    renderTransaction()
-    }
-    function saveTransaction()
-    {
-        localStorage.setItem("transactions",JSON.stringify(transaction))
-    }
-    function renderTransaction(){
-        summary.innerHTML=""
-        container.innerHTML=""
-        transaction.forEach((t,index)=> {
-
-            const div=document.createElement("div")
-        let title=document.createElement("p")
-        let amount=document.createElement("p")
-        let type=document.createElement("span")
-        let p=document.createElement("p")
-        p.textContent=t.date
-        title.textContent=t.title
-        amount.textContent=t.amount
-        type.textContent=t.type
-        div.appendChild(title)
-        div.appendChild(amount)
-        div.appendChild(type)
-        div.appendChild(p)
-        container.appendChild(div)
-        let dltBtn=document.createElement("button")
-        dltBtn.textContent="Delete"
-        dltBtn.addEventListener("click",()=>{
-            transaction.splice(index,1)
-            renderTransaction()
-            saveTransaction()
+        amt.addEventListener("keydown",(e)=>{
+            if(e.key==="Enter")
+        {
+            addBtn.click()
+        }
         })
-div.appendChild(dltBtn)
-        });
-        let income=0;
-        let expense=0;
-        transaction.forEach(t => {
-            if(t.type=="Income")
+         input.addEventListener("keydown",(e)=>{
+            if(e.key==="Enter")
         {
-            income+=t.amount
+            addBtn.click()
         }
-        if(t.type=="Expense")
-        {
-            expense+=t.amount
-        }
-        });
-        let span=document.createElement("span")
-        span.textContent="Balance="
-        let balance=document.createElement("span")
-        balance.textContent=income-expense
-       let cnt=document.createElement("div")
-        let inc=document.createElement("div")
-        inc.textContent=income
-        let exp=document.createElement("div")
-        exp.textContent=expense
-        let h2=document.createElement("h2")
-        h2.textContent="Transactions"
-                let itext=document.createElement("span")
-        itext.textContent="Income:"
-                let etext=document.createElement("span")
-        etext.textContent="Expense:"
-        cnt.appendChild(h2)
-        cnt.appendChild(itext)
-        cnt.appendChild(inc)
-        cnt.appendChild(etext)
-        cnt.appendChild(exp)
-        cnt.appendChild(span)
-        cnt.appendChild(balance)
-        summary.appendChild(cnt)
-    }
-    
+        })
         
+        addBtn.addEventListener("click", addTransaction)
+        function addTransaction() {
+            if (input.value.trim() === "" || amt.value.trim() === "" || amt.value.trim() == "e") {
+                alert('Your input is blank');
+                return;
+            }
+
+            transaction.push({
+                title: input.value.trim(),
+                amount: Number(amt.value.trim()),
+                type: type.value,
+                date: new Date().toLocaleDateString()
+
+            })
+            input.value = ""
+            amt.value = ""
+            saveTransaction()
+            renderTransaction()
+        }
+        function saveTransaction() {
+            localStorage.setItem("transactions", JSON.stringify(transaction))
+        }
+        function renderTransaction() {
+            summary.innerHTML = ""
+            container.innerHTML = ""
+            transaction.forEach((t, index) => {
+
+                const div = document.createElement("div")
+                let title = document.createElement("p")
+                let amount = document.createElement("p")
+                let type = document.createElement("span")
+                let p = document.createElement("p")
+                p.textContent = t.date
+                title.textContent = t.title
+                amount.textContent = t.amount
+                type.textContent = t.type
+                div.appendChild(title)
+                div.appendChild(amount)
+                div.appendChild(type)
+                div.appendChild(p)
+                container.appendChild(div)
+                let dltBtn = document.createElement("button")
+                dltBtn.textContent = "Delete"
+                dltBtn.addEventListener("click", () => {
+                    transaction.splice(index, 1)
+                    renderTransaction()
+                    saveTransaction()
+                })
+                div.appendChild(dltBtn)
+            });
+            let income = 0;
+            let expense = 0;
+            transaction.forEach(t => {
+                if (t.type == "Income") {
+                    income += t.amount
+                }
+                if (t.type == "Expense") {
+                    expense += t.amount
+                }
+            });
+            let span = document.createElement("span")
+            span.textContent = "Balance="
+            let balance = document.createElement("span")
+            balance.textContent = income - expense
+            let cnt = document.createElement("span")
+            let inc = document.createElement("span")
+            inc.innerHTML = income+"<br>"
+            let exp = document.createElement("span")
+            exp.innerHTML = expense+"<br>"
+            let h2 = document.createElement("h2")
+            h2.textContent = "Cash Flow"
+            let itext = document.createElement("span")
+            itext.textContent = "Income:"
+            let etext = document.createElement("span")
+            etext.textContent = "Expense:"
+            cnt.appendChild(h2)
+            cnt.appendChild(itext)
+            cnt.appendChild(inc)
+            cnt.appendChild(etext)
+            cnt.appendChild(exp)
+            cnt.appendChild(span)
+            cnt.appendChild(balance)
+            summary.appendChild(cnt)
+        }
+
+
     </script>
 </body>
+
 </html>
