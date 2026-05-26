@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+    }
+
+    body {
+        background: #0f172a;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 30px;
+    }
+
+    .container {
+        width: 100%;
+        max-width: 900px;
+    }
+
+    .searchBox {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 30px;
+    }
+
+    .search {
+        flex: 1;
+        padding: 14px;
+        border: none;
+        outline: none;
+        border-radius: 12px;
+        background: #1e293b;
+        color: white;
+        font-size: 18px;
+    }
+
+    .search::placeholder {
+        color: #94a3b8;
+    }
+
+    .btn {
+        border: none;
+        background: #3b82f6;
+        color: white;
+        padding: 14px 28px;
+        border-radius: 12px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: 0.3s;
+    }
+
+    .btn:hover {
+        transform: translateY(-2px);
+        background: #2563eb;
+    }
+
+    body {
+        color: white;
+    }
+
+    .contents {
+        display: flex;
+        gap: 30px;
+        align-items: flex-start;
+        flex-wrap: wrap;
+    }
+
+    .img img {
+        width: 280px;
+        border-radius: 20px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    .details {
+        flex: 1;
+        background: #1e293b;
+        color: white;
+        padding: 30px;
+        border-radius: 20px;
+        min-height: 250px;
+        animation: fadeIn 0.4s ease;
+        color: #cbd5e1;
+    }
+
+    .details h1 {
+        font-size: 42px;
+        margin-bottom: 20px;
+    }
+
+    .details h3 {
+        font-size: 22px;
+        margin-bottom: 16px;
+        color: #cbd5e1;
+    }
+
+    .visibility {
+        display: none;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @media(max-width:768px) {
+
+        .contents {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .details {
+            width: 100%;
+        }
+
+        .img img {
+            width: 100%;
+            max-width: 320px;
+        }
+
+        .searchBox {
+            flex-direction: column;
+        }
+
+        .btn {
+            width: 100%;
+        }
+    }
+
+    .details div {
+        margin: 12px 0;
+        font-size: 18px;
+    }
+
+    .img img:hover,.details:hover {
+        transform: translateY(-10px);
+        transition: ease-in-out 0.3s;
+        cursor: pointer;
+    }
+
+
+    .details{
+    line-height: 1.6;
+}
+</style>
+
+<body>
+    <div class="container">
+        <div class="searchBox">
+            <input type="text" class="search" placeholder="Search a movie...">
+            <button class="btn"><img src="search.svg" alt=""></button>
+        </div>
+        <div class="contents">
+            <div class="img">
+            </div>
+            <div class="details visibility">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const input = document.querySelector(".search")
+        const btn = document.querySelector(".btn")
+        const container = document.querySelector(".contents")
+        const image = document.querySelector(".img")
+        const details = document.querySelector(".details")
+
+        btn.addEventListener("click", () => {
+            if (input.value.trim() === "") {
+                alert("Enter a movie name!")
+                return;
+            }
+            details.classList.remove("visibility")
+            getData()
+        }
+        )
+        async function getData() {
+            try {
+                const movieName = encodeURIComponent(input.value.trim())
+                const response = await fetch(`https://www.omdbapi.com/?apikey=ecc00185&t=${movieName}`);
+                if (!response.ok) {
+                    throw new Error(`Response status: ${response.status}`);
+                }
+                const data = await response.json();
+                console.log(data);
+                if (data.Response === "False") {
+                    image.textContent = " Poster not found"
+                    details.textContent = "Movie not found"
+                    return;
+                }
+                renderData(data)
+
+
+            } catch (error) {
+
+                console.log(error.message);
+            }
+            input.value = ""
+        }
+        function renderData(data) {
+
+            image.innerHTML = ""
+            details.innerHTML = ""
+
+            if (data.Poster !== "N/A") {
+                let img = document.createElement("img")
+                img.src = data.Poster
+                image.appendChild(img)
+            }
+            else {
+                image.innerHTML = ""
+                image.textContent = "Poster not Available"
+            }
+            let title = document.createElement("h1")
+            title.textContent = data.Title
+            let date = document.createElement("h3")
+            date.textContent = "Year: " + data.Year
+            let rating = document.createElement("h3")
+            if (data.Ratings.length > 0) {
+                rating.textContent = "Ratings: " + data.Ratings[0].Value;
+            }
+            else {
+                rating.textContent = "Ratings: Not Available";
+            }
+            let plot = document.createElement("div")
+            plot.textContent = "Description: " + data.Plot
+            let actors = document.createElement("div")
+            actors.textContent = "Actors: " + data.Actors
+            let genre = document.createElement("h3")
+            genre.textContent = "Genre: " + data.Genre
+            let runtime = document.createElement("div")
+            runtime.textContent = "Runtime: " + data.Runtime
+            details.appendChild(title)
+            details.appendChild(genre)
+            details.appendChild(plot)
+            details.appendChild(actors)
+            details.appendChild(date)
+            details.appendChild(runtime)
+            details.appendChild(rating)
+        }
+        input.addEventListener("keydown", (e) => {
+            if (e.key === "Enter") {
+                btn.click()
+            }
+        })
+    </script>
+</body>
+
+</html>
