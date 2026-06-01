@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            background:
+                linear-gradient(-45deg,
+                    #0f172a,
+                    #1e293b,
+                    #312e81,
+                    #4f46e5);
+
+            background-size: 400% 400%;
+            animation: bgMove 12s ease infinite;
+        }
+
+        @keyframes bgMove {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .data {
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(12px);
+            border-radius: 25px;
+            padding: 30px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .cardsContainer {
+            display: grid;
+            grid-template-columns: repeat(4, 100px);
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .cardsContainer div {
+            height: 100px;
+            width: 100px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 42px;
+            color: white;
+            cursor: pointer;
+            transition: .35s;
+            box-shadow:
+                0 8px 20px rgba(0, 0, 0, .25),
+                inset 0 0 10px rgba(255, 255, 255, .1);
+        }
+
+        .cardsContainer div {
+            transition:
+                transform .35s ease,
+                box-shadow .35s ease,
+                background .35s ease;
+        }
+
+        .cardsContainer div:hover {
+            transform: translateY(-8px) scale(1.08);
+            box-shadow:
+                0 0 20px rgba(255, 255, 255, .3),
+                0 15px 30px rgba(0, 0, 0, .25);
+        }
+
+        .score,
+        .moves,
+        .movesleft {
+            background: rgba(255, 255, 255, .1);
+            padding: 12px;
+            border-radius: 15px;
+            margin-top: 10px;
+            color: white;
+            font-size: 20px;
+            text-align: center;
+        }
+
+        .Message {
+            font-size: 40px;
+            color: #22c55e;
+            text-align: center;
+            margin-top: 25px;
+            font-weight: bold;
+            animation: winner .8s ease;
+        }
+
+        @keyframes winner {
+            from {
+                transform: scale(.3);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .restartBtn {
+            display: flex;
+            justify-content: center;
+            margin-top: 25px;
+        }
+
+        .restrt {
+            border: none;
+            outline: none;
+            cursor: pointer;
+            margin: 12px;
+
+            padding: 15px 45px;
+            border-radius: 999px;
+
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+
+            background: linear-gradient(135deg,
+                    #f59e0b,
+                    #f97316);
+
+            box-shadow:
+                0 10px 25px rgba(249, 115, 22, .35);
+
+            transition: all .3s ease;
+        }
+
+        .restrt:hover {
+            transform: translateY(-4px) scale(1.05);
+            box-shadow:
+                0 15px 35px rgba(249, 115, 22, .45);
+        }
+
+        .restrt:active {
+            transform: scale(.95);
+        }
+
+        @media(max-width:600px) {
+
+            .cardsContainer {
+                grid-template-columns: repeat(3, 80px);
+            }
+
+            .cardsContainer div {
+                width: 80px;
+                height: 80px;
+                font-size: 32px;
+            }
+
+            .Message {
+                margin-top: 25px;
+                text-align: center;
+                color: white;
+                font-size: 32px;
+                font-weight: bold;
+                min-height: 50px;
+            }
+        }
+
+        .matched {
+            box-shadow:
+                0 0 25px #22c55e,
+                0 0 50px #22c55e;
+        }
+
+        .data {
+            background: rgba(255, 255, 255, .1);
+            backdrop-filter: blur(15px);
+            border-radius: 30px;
+            padding: 35px;
+            box-shadow:
+                0 15px 40px rgba(0, 0, 0, .3);
+        }
+
+        .title {
+            text-align: center;
+            color: white;
+            margin-bottom: 25px;
+            font-size: 42px;
+            animation: float 2s ease-in-out infinite;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-8px);
+            }
+        }
+
+        .cardsContainer div {
+            user-select: none;
+            border-radius: 18px;
+
+            background:
+                linear-gradient(135deg,
+                    rgba(255, 255, 255, .18),
+                    rgba(255, 255, 255, .05));
+
+            backdrop-filter: blur(10px);
+
+            color: white;
+        }
+        .cardsContainer div{
+    animation:cardAppear .4s ease;
+}
+
+@keyframes cardAppear{
+    from{
+        opacity:0;
+        transform:scale(.8);
+    }
+    to{
+        opacity:1;
+        transform:scale(1);
+    }
+}
+.matched{
+    animation:matchedPop .4s ease;
+}
+
+@keyframes matchedPop{
+    0%{
+        transform:scale(1);
+    }
+    50%{
+        transform:scale(1.15);
+    }
+    100%{
+        transform:scale(1);
+    }
+}
+.stats{
+    display:flex;
+    gap:10px;
+    margin-top:20px;
+}
+
+.score,
+.moves,
+.movesleft{
+    flex:1;
+}
+.title{
+    text-shadow:
+    0 0 10px rgba(255,255,255,.5),
+    0 0 20px rgba(255,255,255,.3);
+}
+    </style>
+</head>
+
+<body>
+    <div class="data">
+        <h1 class="title">🧠 Memory Master</h1>
+        <div class="cardsContainer"></div>
+        <div class="stats">
+        <div class="score">Score: 0</div>
+        <div class="moves">Moves: 0</div>
+        <div class="movesleft">Moves Left: 12</div>
+        </div>
+    <div class="Message"></div>
+     </div>
+    <div class="restartBtn"><Button class="restrt">Restart</Button></div>
+    
+    <script>
+        const container = document.querySelector(".cardsContainer")
+        const data = document.querySelector(".data")
+        const resart = document.querySelector(".restrt")
+        const movesCounter = document.querySelector(".moves")
+        const message = document.querySelector(".Message")
+        const movesLeft = document.querySelector(".movesleft")
+        const cards = ["🍎", "🍎", "🍌", "🍌", "🍇", "🍇", "🍉", "🍉", "🥝", "🥝", "🍒", "🍒"]
+        const scoreCont = document.querySelector(".score")
+        let lockBoard = false;
+        let score = 0;
+        let movesleft = 12
+        let moves = 0;
+        let matchedPairs = 0;
+        let timoutid;
+
+        let firstCard = null;
+        let secondCard = null;
+        resart.addEventListener("click", () => {
+            score = 0;
+            moves = 0;
+            movesleft = 12;
+            matchedPairs = 0;
+            firstCard = null;
+            secondCard = null;
+            lockBoard = false;
+            movesLeft.textContent = `Moves Left: ${movesleft}`
+            message.textContent = ""
+            clearTimeout(timoutid)
+            scoreCont.textContent = "Score: " + score
+            movesCounter.textContent = "Moves: " + moves
+            createCards()
+        })
+        function createCards() {
+            container.innerHTML = ""
+            cards.sort(() => Math.random() - 0.5)
+            cards.forEach(card => {
+                let div = document.createElement("div")
+                div.innerHTML = "🎴"
+                container.appendChild(div)
+
+                div.addEventListener("click", () => {
+                    if (lockBoard) {
+                        return;
+                    }
+                    if (div === firstCard) {
+                        return;
+                    }
+
+                    div.textContent = card
+                    if (!firstCard) {
+                        firstCard = div;
+                        console.log(firstCard);
+
+                    }
+                    else if (!secondCard) {
+                        secondCard = div;
+                        console.log(secondCard);
+
+                    }
+                    if (firstCard && secondCard) {
+                        moves++
+                        movesleft--
+                        movesLeft.textContent = `Moves Left: ${movesleft}`
+                        lockBoard = true;
+                        movesCounter.textContent = "Moves: " + moves;
+                        if (moves >= 12 && matchedPairs < cards.length / 2) {
+                            lockBoard = true;
+                            message.innerHTML =
+                                `💀 Game Over!<br>No moves left`;
+                            return;
+                        }
+                        if (firstCard.textContent === secondCard.textContent) {
+                            matchedPairs++
+                            score++
+                             firstCard.classList.add("matched");
+                            secondCard.classList.add("matched");
+                            firstCard.style.background =
+                                "linear-gradient(135deg,#22c55e,#16a34a)";
+                            secondCard.style.background =
+                                "linear-gradient(135deg,#22c55e,#16a34a)";
+                                console.log('Match');
+                            if (matchedPairs >= cards.length / 2) {
+                                movesCounter.textContent = "Moves: " + moves;
+                                scoreCont.textContent = "Score: " + score;
+                                message.innerHTML =
+                                    `🏆 You Won!<br>Score: ${score}<br>Moves: ${moves}`;
+                                lockBoard = true;
+                                return;
+                            }
+                            firstCard.style.pointerEvents = "none";
+                            secondCard.style.pointerEvents = "none";
+                            firstCard = null;
+                            secondCard = null;
+                            setTimeout(() => {
+                                if (matchedPairs < cards.length / 2) {
+                                    lockBoard = false;
+                                }
+
+                            }, 700);
+
+                        }
+                        else {
+                            console.log('Do not match');
+                            timoutid = setTimeout(() => {
+                                firstCard.textContent = "🎴"
+                                secondCard.textContent = "🎴"
+                                firstCard = null;
+                                secondCard = null;
+                                lockBoard = false;
+                            }, 1000);
+                        }
+
+                        scoreCont.textContent = "Score: " + score;
+                        movesCounter.textContent = "Moves: " + moves
+                    }
+
+                })
+
+            })
+        }
+        createCards()
+    </script>
+</body>
+
+</html>
