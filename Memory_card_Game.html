@@ -234,51 +234,58 @@
 
             color: white;
         }
-        .cardsContainer div{
-    animation:cardAppear .4s ease;
-}
 
-@keyframes cardAppear{
-    from{
-        opacity:0;
-        transform:scale(.8);
-    }
-    to{
-        opacity:1;
-        transform:scale(1);
-    }
-}
-.matched{
-    animation:matchedPop .4s ease;
-}
+        .cardsContainer div {
+            animation: cardAppear .4s ease;
+        }
 
-@keyframes matchedPop{
-    0%{
-        transform:scale(1);
-    }
-    50%{
-        transform:scale(1.15);
-    }
-    100%{
-        transform:scale(1);
-    }
-}
-.stats{
-    display:flex;
-    gap:10px;
-    margin-top:20px;
-}
+        @keyframes cardAppear {
+            from {
+                opacity: 0;
+                transform: scale(.8);
+            }
 
-.score,
-.moves,
-.movesleft{
-    flex:1;
-}
-.title{
-    text-shadow:
-    0 0 10px rgba(255,255,255,.5),
-    0 0 20px rgba(255,255,255,.3);
-}
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .matched {
+            animation: matchedPop .4s ease;
+        }
+
+        @keyframes matchedPop {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.15);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .stats {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .score,
+        .moves,
+        .movesleft {
+            flex: 1;
+        }
+
+        .title {
+            text-shadow:
+                0 0 10px rgba(255, 255, 255, .5),
+                0 0 20px rgba(255, 255, 255, .3);
+        }
     </style>
 </head>
 
@@ -287,14 +294,14 @@
         <h1 class="title">🧠 Memory Master</h1>
         <div class="cardsContainer"></div>
         <div class="stats">
-        <div class="score">Score: 0</div>
-        <div class="moves">Moves: 0</div>
-        <div class="movesleft">Moves Left: 12</div>
+            <div class="score">Score: 0</div>
+            <div class="moves">Moves: 0</div>
+            <div class="movesleft">Moves Left: 12</div>
         </div>
-    <div class="Message"></div>
-     </div>
+        <div class="Message"></div>
+    </div>
     <div class="restartBtn"><Button class="restrt">Restart</Button></div>
-    
+
     <script>
         const container = document.querySelector(".cardsContainer")
         const data = document.querySelector(".data")
@@ -361,22 +368,17 @@
                         movesLeft.textContent = `Moves Left: ${movesleft}`
                         lockBoard = true;
                         movesCounter.textContent = "Moves: " + moves;
-                        if (moves >= 12 && matchedPairs < cards.length / 2) {
-                            lockBoard = true;
-                            message.innerHTML =
-                                `💀 Game Over!<br>No moves left`;
-                            return;
-                        }
+                 
                         if (firstCard.textContent === secondCard.textContent) {
                             matchedPairs++
                             score++
-                             firstCard.classList.add("matched");
+                            firstCard.classList.add("matched");
                             secondCard.classList.add("matched");
                             firstCard.style.background =
                                 "linear-gradient(135deg,#22c55e,#16a34a)";
                             secondCard.style.background =
                                 "linear-gradient(135deg,#22c55e,#16a34a)";
-                                console.log('Match');
+                            console.log('Match');
                             if (matchedPairs >= cards.length / 2) {
                                 movesCounter.textContent = "Moves: " + moves;
                                 scoreCont.textContent = "Score: " + score;
@@ -407,6 +409,12 @@
                                 lockBoard = false;
                             }, 1000);
                         }
+                               if (moves >= 12 && matchedPairs < cards.length / 2) {
+                            lockBoard = true;
+                            message.innerHTML =
+                                `💀 Game Over!<br>No moves left`;
+                            return;
+                        } 
 
                         scoreCont.textContent = "Score: " + score;
                         movesCounter.textContent = "Moves: " + moves
